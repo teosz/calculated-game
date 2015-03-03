@@ -21,51 +21,7 @@ var difference : Vector3;
 private var max : Vector3;
 private var min : Vector3;
 
-function classic_movement ()
-{	
-	if (Input.GetKey(moveUp))
-	{
-		transform.Translate(Vector3.up*Time.deltaTime*speed,Space.World);
-	}
-	else if (Input.GetKey(moveDown))
-	{
-		transform.Translate(Vector3.down*Time.deltaTime*speed,Space.World);
-	}
-	if (Input.GetKey(moveRight))
-	{
-		transform.Translate(Vector3.right*Time.deltaTime*speed,Space.World);
-	}
-	else if (Input.GetKey(moveLeft))
-	{
-		transform.Translate(Vector3.left*Time.deltaTime*speed,Space.World);
-	}
-}
-
-function moving_with_cursor_at_edge()
-{
-	if(Input.mousePosition.y > Screen.height * FRACTION)
-		transform.Translate(Vector3.up*Time.deltaTime*speed,Space.World);
-	else if(Input.mousePosition.y < Screen.height * (1-FRACTION))
-		transform.Translate(Vector3.down*Time.deltaTime*speed,Space.World);
-	if(Input.mousePosition.x > Screen.width * FRACTION)
-		transform.Translate(Vector3.right*Time.deltaTime*speed,Space.World);
-	else if(Input.mousePosition.x < Screen.width * (1-FRACTION))
-		transform.Translate(Vector3.left*Time.deltaTime*speed,Space.World);
-}
-
-function movement_final_form_01()
-{
-	if (Input.GetKey(moveUp)||Input.mousePosition.y > Screen.height * FRACTION)
-		transform.Translate(Vector3.up*Time.deltaTime*speed,Space.World);
-	if (Input.GetKey(moveDown)||Input.mousePosition.y < Screen.height * (1-FRACTION))
-		transform.Translate(Vector3.down*Time.deltaTime*speed,Space.World);
-	if(Input.GetKey(moveRight)||Input.mousePosition.x > Screen.width * FRACTION)
-		transform.Translate(Vector3.right*Time.deltaTime*speed,Space.World);
-	if(Input.GetKey(moveLeft)||Input.mousePosition.x < Screen.width * (1-FRACTION))
-		transform.Translate(Vector3.left*Time.deltaTime*speed,Space.World);
-}
-
-function movement_final_form_02()
+function movement_final_form()
 {
 	if (Input.GetKey(moveUp)||Input.mousePosition.y > Screen.height * FRACTION)
 		intermediate_position.y += speed*Time.deltaTime;
@@ -87,15 +43,6 @@ function Start ()
     max.x = map.sprite.bounds.extents.x - horzExtent;
     min.y = vertExtent - map.sprite.bounds.extents.y;
     max.y = map.sprite.bounds.extents.y - vertExtent;
-    
-    Debug.Log(vertExtent);  
-    Debug.Log(horzExtent);
-    
-    Debug.Log(map.sprite.bounds.extents.y);
-    Debug.Log(map.sprite.bounds.extents.x);
-    
-    Debug.Log(max);
-    Debug.Log(min);
 }
 
 function Update ()
@@ -118,7 +65,7 @@ function Update ()
 	}
 	else
 	{
-		movement_final_form_02();
+		movement_final_form();
 	}
 	if(Input.GetKey(lookAtChar))
 	{
