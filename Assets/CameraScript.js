@@ -85,8 +85,14 @@ function Start ()
     // Calculations assume map is position at the origin
     min.x = horzExtent - map.sprite.bounds.extents.x;
     max.x = map.sprite.bounds.extents.x - horzExtent;
-    min.y = horzExtent - map.sprite.bounds.extents.y;
-    max.y = map.sprite.bounds.extents.y - horzExtent;
+    min.y = vertExtent - map.sprite.bounds.extents.y;
+    max.y = map.sprite.bounds.extents.y - vertExtent;
+    
+    Debug.Log(vertExtent);  
+    Debug.Log(horzExtent);
+    
+    Debug.Log(map.sprite.bounds.extents.y);
+    Debug.Log(map.sprite.bounds.extents.x);
     
     Debug.Log(max);
     Debug.Log(min);
