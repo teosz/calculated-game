@@ -1,0 +1,25 @@
+TO DO LIST
+==========
+
+* fa ca white house sa se inroseasca daca este peste alte obiecte, sau sa se inverzeasca
+daca nu folosind SpriteRenderer.color (pentru a schimba culoarea) si
+Physics2D.OverlapAreaAll pentru a detecta obiectele;
+* daca casa e rosie sa nu se poata construi o casa peste;
+*seteaza la inceputul jocului gravitatea generala fiind 0 folosind Physics2D.gravity
+intr-un script intr-un obiect facut special pentru pentru scripturi generale;
+*imparte jocul pe layeruri;
+*sa ne hotaram daca la marginea terenului vor fi obiecte solide ce il blocheaza, sau daca
+ii punem hartii un Edge Collider 2D (punerea sa se faca cu un script)
+*adaugarea statusurilor unui character
+*fa caracterul sa traga "sageti" sau sa loveasca aproape daca nu este in build mode
+si apasa click stanga
+*pune-i caracterului un "scut", obiect solid care sa fie tangent cu  characterul sau la
+distanta foarte mica si sa se roteasca dupa mouse (da stiu ca asta ar interactiona prost
+cu atacurile, dar sa ne imaginam ca e support, sau ca scutul si-l paote pune si da jos,
+eventual fa-l sa nu poata ataca daca are scutul pus)
+*fa un caracter in perspectiva (>.> teo,salo <.<)
+*fa ca playerul sa "moara" daca are 0 sau mai putin hp
+*muta repoul pe bitbucket
+*pune acest repo sub forma de taskuri pe bitbucket
+
+to be continue...
