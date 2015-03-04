@@ -6,11 +6,14 @@ var moveLeft : KeyCode;
 var moveRight : KeyCode;
 var moveToPoint : KeyCode; //not used
 var moveToPointMouseButton : int = 1;
+var enableBuildMode : KeyCode;
+var buildMousebutton : int = 0;
 
 var targetPoint : Vector3;
 var targetInWorld : Vector3;
 
 var newMoveCommand : boolean = true;
+var buildMode : boolean = false;
 
 var speed : float = 600;
 
@@ -18,8 +21,12 @@ var rotLeft : KeyCode;
 var rotRight : KeyCode;
 var rotSpeed : float = 600;
 
-var target : Transform;
+var target : Transform;  //not used i think
 var cameraTr : Transform;
+
+var house : GameObject;
+var whiteHouse : GameObject;
+private var whiteHouseClone : GameObject;
 
 private var dir : Vector3;
 private var POWER : float = 2;       //puterea functie folosite pentru a micsora viteza obiectului cand se apropie de tiinta
@@ -31,7 +38,7 @@ function look_at_cursor()
 {
 	var cursorPos : Vector3;
 	cursorPos = Input.mousePosition;
-	cursorPos.z = cameraTr.position.z;
+	cursorPos.z = cameraTr.position.z; // de ce sa nu ii dau valoarea zero?
 	var worldPos : Vector3 = Camera.main.ScreenToWorldPoint(cursorPos);
 	
 	dir = worldPos - transform.position;
@@ -65,54 +72,13 @@ function classic_movement ()
 	}
 }
 
-//not used
-function modern_movement()
+function get_mouse_position() : Vector3
 {
-	rigidbody2D.velocity.x = 0;
-	rigidbody2D.velocity.y = 0;
-	var convertedAngle : float = (transform.eulerAngles.z+90)*Mathf.Deg2Rad;
-	var thisCollider = GetComponent(CircleCollider2D);
-	var exDiameter = thisCollider.radius*MULTIFACTOR; //it used to be just the diameter
-	var distance : float;
-	
-	if (Input.GetKey(moveFront))
-	{
-		newMoveCommand = true;
-		rigidbody2D.velocity.y += Time.deltaTime*Mathf.Sin(convertedAngle)*speed;
-		rigidbody2D.velocity.x += Time.deltaTime*Mathf.Cos(convertedAngle)*speed;
-		distance = Mathf.Sqrt(dir.y*dir.y + dir.x*dir.x);
-		if (distance < exDiameter)
-		{
-			rigidbody2D.velocity.y *= Mathf.Pow(distance/exDiameter,POWER);
-			rigidbody2D.velocity.x *= Mathf.Pow(distance/exDiameter,POWER);
-		}
-		if (distance < FRACTION*thisCollider.radius)
-		{
-			rigidbody2D.velocity.y *= 0;
-			rigidbody2D.velocity.x *= 0;
-		}
-	}
-	else if (Input.GetKey(moveBack))
-	{
-		rigidbody2D.velocity.y += Time.deltaTime*Mathf.Sin(convertedAngle)*speed*-1;
-		rigidbody2D.velocity.x += Time.deltaTime*Mathf.Cos(convertedAngle)*speed*-1;
-		newMoveCommand = true;
-	}
-	convertedAngle = (transform.eulerAngles.z)*Mathf.Deg2Rad;
-	if (Input.GetKey(moveRight))
-	{
-		rigidbody2D.velocity.y += Time.deltaTime*Mathf.Sin(convertedAngle)*speed;
-		rigidbody2D.velocity.x += Time.deltaTime*Mathf.Cos(convertedAngle)*speed;
-		newMoveCommand = true;
-	}
-	else if (Input.GetKey(moveLeft))
-	{
-		rigidbody2D.velocity.y += Time.deltaTime*Mathf.Sin(convertedAngle)*speed*-1;
-		rigidbody2D.velocity.x += Time.deltaTime*Mathf.Cos(convertedAngle)*speed*-1;
-		newMoveCommand = true;
-	}
+	var cursorPos : Vector3;
+	cursorPos = Input.mousePosition;
+	cursorPos.z = 30;
+	return Camera.main.ScreenToWorldPoint(cursorPos);
 }
-//not used
 
 function move_to_point(targetPoint : Vector3)
 {
@@ -137,6 +103,7 @@ function move_to_point(targetPoint : Vector3)
 	}
 }
 
+//not used
 function rotate()
 { 
 	if(Input.GetKey(rotLeft))
@@ -144,14 +111,40 @@ function rotate()
 	else if(Input.GetKey(rotRight))
 		transform.Rotate(0, 0, Time.deltaTime*rotSpeed*-1);
 }
+//not used
+
+function enable_build_mode()
+{
+
+	if(Input.GetKeyDown(enableBuildMode))
+	{
+		if(buildMode)
+		{
+			buildMode = false;
+			Destroy(whiteHouseClone);
+		}
+		else
+		{ 
+			buildMode = true;
+			whiteHouseClone = Instantiate(whiteHouse);
+		}
+	}
+}
+
 
 function Start ()
 {
-	look_at_cursor();
+
 }
 
 function Update ()
 {
+	enable_build_mode();
+	if(buildMode&&Input.GetMouseButtonDown(buildMousebutton))
+	{
+		Instantiate(house, whiteHouseClone.transform.position, whiteHouseClone.transform.rotation);
+	}
+	
 	classic_movement();
 	look_at_cursor();
 	

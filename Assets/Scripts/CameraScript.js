@@ -45,7 +45,7 @@ function Start ()
     max.y = map.sprite.bounds.extents.y - vertExtent;
 }
 
-function Update ()
+function LateUpdate ()
 {
 	if(Input.GetKeyDown(lockKey))
 	{
