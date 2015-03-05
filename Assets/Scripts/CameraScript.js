@@ -35,7 +35,7 @@ function movement_final_form()
 
 function Start ()
 {
-	var vertExtent = Camera.main.camera.orthographicSize;    
+	var vertExtent = Camera.main.GetComponent.<Camera>().orthographicSize;    
     var horzExtent = vertExtent * Screen.width / Screen.height;
     
     // Calculations assume map is position at the origin

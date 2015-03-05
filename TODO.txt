@@ -21,5 +21,8 @@ eventual fa-l sa nu poata ataca daca are scutul pus)
 *fa ca playerul sa "moara" daca are 0 sau mai putin hp
 *muta repoul pe bitbucket
 *pune acest repo sub forma de taskuri pe bitbucket
+*seteaza pentru orice obict z= nr_maxim_de_layeruri*y , nr_max... fiind numarul maxim de
+straturi necesar unui obiect (de ex characterul are layer pt mana stanga, dreapta, si
+corp, si restul au un layer. max... va fi 3
 
 to be continue...

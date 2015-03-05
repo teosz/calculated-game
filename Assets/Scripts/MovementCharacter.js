@@ -48,26 +48,26 @@ function look_at_cursor()
 
 function classic_movement ()
 {
-	rigidbody2D.velocity = Vector2.zero;
+	GetComponent.<Rigidbody2D>().velocity = Vector2.zero;
 	
 	if (Input.GetKey(moveFront))
 	{
-		rigidbody2D.velocity.y = Time.deltaTime*speed;
+		GetComponent.<Rigidbody2D>().velocity.y = Time.deltaTime*speed;
 		newMoveCommand = true;
 	}
 	else if (Input.GetKey(moveBack))
 	{
-		rigidbody2D.velocity.y = Time.deltaTime*speed *-1;
+		GetComponent.<Rigidbody2D>().velocity.y = Time.deltaTime*speed *-1;
 		newMoveCommand = true;
 	}
 	if (Input.GetKey(moveRight))
 	{
-		rigidbody2D.velocity.x = Time.deltaTime*speed;
+		GetComponent.<Rigidbody2D>().velocity.x = Time.deltaTime*speed;
 		newMoveCommand = true;
 	}
 	else if (Input.GetKey(moveLeft))
 	{
-		rigidbody2D.velocity.x = Time.deltaTime*speed *-1;
+		GetComponent.<Rigidbody2D>().velocity.x = Time.deltaTime*speed *-1;
 		newMoveCommand = true;
 	}
 }
@@ -88,18 +88,18 @@ function move_to_point(targetPoint : Vector3)
 	var exDiameter = thisCollider.radius*MULTIFACTOR;
 	var distance : float;
 	
-	rigidbody2D.velocity.y = Time.deltaTime*Mathf.Sin(angle)*speed;
-	rigidbody2D.velocity.x = Time.deltaTime*Mathf.Cos(angle)*speed;
+	GetComponent.<Rigidbody2D>().velocity.y = Time.deltaTime*Mathf.Sin(angle)*speed;
+	GetComponent.<Rigidbody2D>().velocity.x = Time.deltaTime*Mathf.Cos(angle)*speed;
 	distance = Mathf.Sqrt(thisDir.y*thisDir.y + thisDir.x*thisDir.x);
 	if (distance < exDiameter)
 	{
-		rigidbody2D.velocity.y *= Mathf.Pow(distance/exDiameter,POWER);
-		rigidbody2D.velocity.x *= Mathf.Pow(distance/exDiameter,POWER);
+		GetComponent.<Rigidbody2D>().velocity.y *= Mathf.Pow(distance/exDiameter,POWER);
+		GetComponent.<Rigidbody2D>().velocity.x *= Mathf.Pow(distance/exDiameter,POWER);
 	}
 	if (distance < FRACTION*thisCollider.radius)
 	{
-		rigidbody2D.velocity.y *= 0;
-		rigidbody2D.velocity.x *= 0;
+		GetComponent.<Rigidbody2D>().velocity.y *= 0;
+		GetComponent.<Rigidbody2D>().velocity.x *= 0;
 	}
 }
 
@@ -146,7 +146,7 @@ function Update ()
 	}
 	
 	classic_movement();
-	look_at_cursor();
+	//look_at_cursor();
 	
 	if(Input.GetMouseButton(moveToPointMouseButton))
 	{
