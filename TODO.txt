@@ -1,10 +1,7 @@
 TO DO LIST
 ==========
 
-* fa ca white house sa se inroseasca daca este peste alte obiecte, sau sa se inverzeasca
-daca nu folosind SpriteRenderer.color (pentru a schimba culoarea) si
-Physics2D.OverlapAreaAll pentru a detecta obiectele;
-* daca casa e rosie sa nu se poata construi o casa peste;
+
 *seteaza la inceputul jocului gravitatea generala fiind 0 folosind Physics2D.gravity
 intr-un script intr-un obiect facut special pentru pentru scripturi generale;
 *imparte jocul pe layeruri;

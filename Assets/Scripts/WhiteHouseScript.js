@@ -2,6 +2,11 @@
 
 public static var LAYER : int = 3;
 
+public var underneath : Collider2D;
+
+private var RED : Color = Color(0.8,0.2,0.2,0.75); //de revizuit culorile
+private var GREEN : Color = Color(0.2,0.8,0.2,0.75);
+
 function Start ()
 {
 	var cursorPos : Vector3;
@@ -21,14 +26,20 @@ function Update ()
 	var worldPos : Vector3 = Camera.main.ScreenToWorldPoint(cursorPos);	
 	transform.position = worldPos;
 	
-	var instance : SpriteRenderer = GetComponent(SpriteRenderer);
-	var pointA : Vector2 = myRenderer.sprite.bounds.min;
-	var pointB : Vector2 = myRenderer.sprite.bounds.max;
-	Debug.Log(pointA);
-	Debug.Log(pointB);
-	var ceva : Collider2D[] =Physics2D.OverlapAreaAll(pointA, pointB);
-	if(ceva)
-		Debug.Log(30); 
-	Debug.Log(Physics2D.OverlapAreaAll(pointA, pointB));// pune si celelalte variabile.
+	
+	var pointA : Vector2;
+	pointA.x = transform.position.x - myRenderer.sprite.bounds.extents.x;
+	pointA.y = transform.position.y - myRenderer.sprite.bounds.extents.y;
+	
+	var pointB : Vector2;
+	pointB.x = transform.position.x + myRenderer.sprite.bounds.extents.x;
+	pointB.y = transform.position.y + myRenderer.sprite.bounds.extents.y;
+	
+	underneath = Physics2D.OverlapArea(pointA, pointB); //pune si celelalte variabile
+	
+	if(underneath)
+		myRenderer.color = RED;
+	else
+		myRenderer.color = GREEN;
 	
 }

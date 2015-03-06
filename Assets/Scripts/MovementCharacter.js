@@ -33,7 +33,7 @@ private var POWER : float = 2;       //puterea functie folosite pentru a micsora
 private var FRACTION : float = 0.24;  //fractie din raza , cand distanta < fractie*raza atunci viteza din mergi_in_fata_ = 0
 private var MULTIFACTOR : float = 3;   //factorul cu care multiplic raza pentru a afla distanta de la care incep sa incetinesc
 
-
+//not used
 function look_at_cursor()
 {
 	var cursorPos : Vector3;
@@ -45,6 +45,7 @@ function look_at_cursor()
  	var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
  	transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 }
+//not used
 
 function classic_movement ()
 {
@@ -132,6 +133,7 @@ function enable_build_mode()
 }
 
 
+
 function Start ()
 {
 
@@ -140,13 +142,14 @@ function Start ()
 function Update ()
 {
 	enable_build_mode();
-	if(buildMode&&Input.GetMouseButtonDown(buildMousebutton))
+	if(buildMode)
 	{
-		Instantiate(house, whiteHouseClone.transform.position, whiteHouseClone.transform.rotation);
+		var whiteHouseScript : WhiteHouseScript = whiteHouseClone.GetComponent(WhiteHouseScript); 
+		if(Input.GetMouseButtonDown(buildMousebutton)&&!whiteHouseScript.underneath)
+			Instantiate(house, whiteHouseClone.transform.position, whiteHouseClone.transform.rotation);
 	}
 	
 	classic_movement();
-	//look_at_cursor();
 	
 	if(Input.GetMouseButton(moveToPointMouseButton))
 	{
